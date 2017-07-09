@@ -1,0 +1,7 @@
+#!/bin/bash
+# you deploy this code to the folder that you want to use
+
+IGNORELIST="bootstrap.css,font-awesome.css"
+FOLDR=$PWD/themes/rastro-restaurant
+
+. run wp/codecheck/phpcheckthis.sh

@@ -1,0 +1,6 @@
+#!/bin/bash
+# deploy this
+
+THEMETOEVAL="https://wordpress.org/themes/download/rastro-restaurant.1.0.6.zip?nostats=1"
+
+. run wp/theme/themeeval.sh

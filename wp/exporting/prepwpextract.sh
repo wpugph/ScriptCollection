@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DB_NAME_DEF="DB_NAME_DEF"
+DB_USER_DEF="DB_USER_DEF"
+DB_PASS_DEF="DB_PASS_DEF"
+
+URL_LOC_DEF="URL_LOC_DEF"
+URL_LIVE_DEF="URL_LIVE_DEF"
+
+sed "s|$DB_NAME_DEF|$DB_USER|g;s|$DB_USER_DEF|$DB_NAME|g;s|$DB_PASS_DEF|$DB_PASS|g;s|$URL_LOC_DEF|$URL_LOC|g;;s|$URL_LIVE_DEF|$URL_LIVE|g;" $MYSCRIPTFOLDER/lib/wp/exporting/wpextract2.php > wpextract.php
+
+echo $URL_LIVE

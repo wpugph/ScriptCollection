@@ -1,0 +1,21 @@
+#!/bin/bash
+# TODO: Fix 2nd param if there are spaces
+# used in 1 command:
+# - add all
+# - commit
+# - push
+
+if [ -z "$2" ]
+then
+	echo "Please enter Commit Message: "
+	read GIT_COMMIT_MSG
+else
+	GIT_COMMIT_MSG=$2
+fi
+
+git add *
+git add .
+
+git commit -m "${GIT_COMMIT_MSG}"
+
+git push -u origin master

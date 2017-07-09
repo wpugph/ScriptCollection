@@ -1,0 +1,4 @@
+1) Setup config file in /Applications/XAMMP/htdocs/wp/pluginfull/build-plugin.config
+2) run script inside the pluginfull foder to work, needs updating to run everywhere
+
+/Applications/XAMPP/htdocs/wp/pluginfull/build-plugin.sh

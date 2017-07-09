@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo xampp startapache
+sudo xampp startmysql

@@ -1,0 +1,19 @@
+#!/bin/bash
+# destroys a wp installation
+
+. $MYSCRIPTFOLDER/lib/wp/readwpconfig.sh
+
+printf "Proceed deleting WP in $PWD ? \n"
+printf "and Database: $WPDBNAME (yes/n) ?"
+read PROCEED
+
+if [ "$PROCEED" == "yes" ]; then
+
+	printf "MYsqlroot pass?"
+	read DB_ROOT_PASS
+
+	. $MYSCRIPTFOLDER/lib/db/dbdelete.sh
+
+	. $MYSCRIPTFOLDER/lib/wp/deleting/deletecore.sh
+	. $MYSCRIPTFOLDER/lib/wp/deleting/deletecontents.sh
+fi

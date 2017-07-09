@@ -1,0 +1,84 @@
+#!/bin/bash
+# 1) Create dir (make sure run server/start)
+# 2) Copy config below and create a file in the target dir config.sh
+# 3) comment out the scripts that you wont use
+# 4) inside the target folder run wp/create
+
+# TODO
+# add wp-content 777
+# childtheme Setup
+# custom plugin support
+# update mu-plugin version
+
+# DB_ROOT_PASS=1234qwer
+# DB_NAME=cnr_bf2
+# DB_USER=cnr_bf2
+# DB_PASS=1234
+#
+# SITE_NAME='carl test bootstrapfast from git'
+# LOCAL_URL="http://localhost/themes/bootgit"
+#
+# WP_ADMIN="carlalberto"
+# WP_PASS="o8sydf24r3f"
+# WP_EMAIL="cralberto11@gmail.com"
+#
+# FTP_SERVER="http://tes.com"
+# FTP_USER="ad2min"
+# FTP_PASS="q5234"
+# FTP_LOCPATH=$PWD
+# FTP_REMOTEPATH="/"
+#
+# GIT_URL="https://github.com/carl-alberto/test1.git"
+# PARENT_THEME="https://github.com/wpugph/Fast-Responsive-Bootstrap-WP-Starter-theme/archive/release/rc1.0.1.zip"
+# CHILD_THEME=$MYSCRIPTFOLDER/lib/wp/theme/childtheme/*
+# CHILD_THEME_NAME="divorcesol"
+
+
+# lets rock!!!!
+
+. $PWD/config.sh
+
+printf "Proceed create site here: $PWD (y/n) ?"
+read PROCEED_INSTALL
+
+
+if [ "$PROCEED_INSTALL" == "y" ]; then
+	# create db
+	. $MYSCRIPTFOLDER/lib/db/create.sh
+	# prepares wp files
+	. $MYSCRIPTFOLDER/lib/wp/createdev.sh
+	# do some custom cleanups
+
+	. $MYSCRIPTFOLDER/lib/wp/customcleanup.sh
+	. $MYSCRIPTFOLDER/lib/wp/adduser.sh
+	# add theme review setup
+#	. $MYSCRIPTFOLDER/lib/wp/theme/themereview.sh
+	. $MYSCRIPTFOLDER/lib/wp/theme/themeinstall.sh
+
+	. $MYSCRIPTFOLDER/lib/wp/theme/childthemecp.sh
+
+	. $MYSCRIPTFOLDER/lib/wp/theme/brunchprep.sh
+
+fi
+
+printf "Setup ftp config (y/n) ?"
+read PROCEED_FTP
+
+if [ "$PROCEED_FTP" == "y" ]; then
+	. $MYSCRIPTFOLDER/lib/wp/ftpconfig/ftproot.sh
+fi
+
+printf "Has git support (y/n) ? "
+read PROCEED_GIT
+
+if [ "$PROCEED_GIT" == "y" ]; then
+	. $MYSCRIPTFOLDER/lib/wp/gitconfig/gitwpcontent.sh
+fi
+
+# delete config file
+# rm $PWD/config.sh
+
+#open $LOCAL_URL
+#open $LOCAL_URL/wp-admin
+
+# echo "Local site ready!!: " . $LOCAL_URL

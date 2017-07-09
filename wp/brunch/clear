@@ -1,0 +1,15 @@
+#!/bin/bash
+# brunch build
+# brunch watch
+# brunch
+
+# copy config files from themes/brunch
+# uopdate brunch-config.coffee
+
+printf "Proceed clearing your brunch assets in your theme $PWD ? \n"
+read PROCEED
+if [ "$PROCEED" == "Y" ]; then
+	rm -R bower_components
+	rm -R node_modules
+	rm -R assets
+fi

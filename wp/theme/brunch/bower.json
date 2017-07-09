@@ -1,0 +1,25 @@
+{
+  "name": "wp-theme-bootstrapfast",
+  "authors": [
+    "Carl Alberto <carl@alber2.com>"
+  ],
+  "license": "GPL2",
+  "private": "true",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.1",
+    "bootstrap-rtl": "x",
+	"bootstrap": "v4.0.0-alpha.6"
+  },
+  "overrides": {
+    "bootstrap-rtl": {
+      "dependencies": {}
+    }
+  }
+}

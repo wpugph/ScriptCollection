@@ -1,0 +1,12 @@
+#find files bigger than 100M
+find . -type f -size +100M -exec ls -lh {} \;
+
+find . -type f -size +10M -exec ls -lh {} \;
+
+
+#get folder size
+du -sh file_path
+
+
+
+zip -r myfiles.zip mydir

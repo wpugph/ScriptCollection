@@ -1,0 +1,10 @@
+mysql -uroot -p${DB_ROOT_PASS} -e "CREATE DATABASE ${DB_USER} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+mysql -uroot -p${DB_ROOT_PASS} -e "CREATE USER ${DB_USER}@localhost IDENTIFIED BY '${DB_PASS}';"
+mysql -uroot -p${DB_ROOT_PASS} -e "GRANT ALL PRIVILEGES ON ${DB_USER}.* TO '${DB_USER}'@'localhost';"
+mysql -uroot -p${DB_ROOT_PASS} -e "FLUSH PRIVILEGES;"
+
+mysql -uroot -e "CREATE DATABASE DB_NAME /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+
+mysql -uroot -p1234qwer -e "CREATE DATABASE cnr_cnrsys1 /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+
+1234qwer

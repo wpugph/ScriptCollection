@@ -1,0 +1,38 @@
+#!/bin/bash
+#copy sample wp init file in your wp root installation to upload all your files
+
+#source $PWD/init.sh
+
+LOCAL_URL="http://localhost/project"
+LIVE_URL="http://server.com"
+
+FTP_SERVER="ftp.server.com"
+FTP_USER="admin"
+FTP_PASS="pass"
+FTP_LOCPATH=$PWD
+FTP_REMOTEPATH="/public_html"
+
+DB_USER="admin"
+DB_NAME="admin"
+DB_PASS="pass"
+
+URL_LOC=$LOCAL_URL
+URL_LIVE=$LIVE_URL
+
+# . $MYSCRIPTFOLDER/lib/wp/readwpconfig.sh
+
+. $MYSCRIPTFOLDER/lib/wp/exporting/wpcompress.sh
+
+. $MYSCRIPTFOLDER/lib/wp/exporting/prepwpextract.sh
+
+#all upload
+. $MYSCRIPTFOLDER/lib/wp/exporting/ftpuploadupdates.sh
+
+selected upload only
+#. $MYSCRIPTFOLDER/lib/wp/exporting/ftpuploadselected.sh
+
+# fixed remote extraction
+. $MYSCRIPTFOLDER/lib/wp/exporting/remoteextract.sh
+
+# create a cleanup script
+# . $MYSCRIPTFOLDER/lib/wp/exporting/cleanuptemp.sh
