@@ -1,18 +1,10 @@
 #!/bin/bash.
 
+. $PWD/new.cfg
+
 # define your terminus executable path
 PATH=$PATH:/bin:/usr/bin:/home/carl/terminus/vendor/bin
 export PATH
-
-# Generate your machine token here: https://pantheon.io/docs/machine-tokens/
-MACHINETOKEN='MACHINETOKEN'
-
-# define your WP site settings
-SITENAME='Your WordPress Site Name'
-PANTHEONNAME='UniquePantheonName'
-USERNAME='WPUsername'
-PASSWORD='wpAdminPassword'
-EMAIL='your@email.com'
 
 # Authenticate your terminus auth:login
 terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN  --yes
@@ -20,7 +12,7 @@ terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN  --yes
 terminus site:create $PANTHEONNAME "$SITENAME" WordPress
 
 #install core WP
-terminus wp $PANTHEONNAME.dev -- core install --url=https://dev-$PANTHEONNAME.pantheonsite.io --title="$SITENAME" --admin_user=$USERNAME --admin_pass="$PASSWORD" --admin_email="$EMAIL"
+terminus wp $PANTHEONNAME.dev -- core install --url=https://dev-$PANTHEONNAME.pantheonsite.io --title="$SITENAME" --admin_user=$USERNAME --admin_password="$PASSWORD" --admin_email="$EMAIL"
 
 ## TODO: Install WordPress without disclosing admin_password to bash history
 # wp core install --url=example.com --title=Example --admin_user=supervisor --admin_email=info@example.com --prompt=admin_password < admin_password.t$
