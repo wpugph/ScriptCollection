@@ -6,27 +6,38 @@
 PATH=$PATH:/bin:/usr/bin:/home/carl/terminus/vendor/bin
 export PATH
 
-# Authenticate your terminus auth:login
-terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN  --yes
+lando init --recipe wordpress --webroot . --name $SITENAME
+# lando start
+# lando wp core install --url=http://$LOCALNAME.lndo.site --title="$SITENAME" --admin_user=$USERNAME --admin_password="$PASSWORD" --admin_email="$EMAIL"
 
-terminus site:create $PANTHEONNAME "$SITENAME" WordPress
+lando start
 
-#install core WP
-terminus wp $PANTHEONNAME.dev -- core install --url=https://dev-$PANTHEONNAME.pantheonsite.io --title="$SITENAME" --admin_user=$USERNAME --admin_password="$PASSWORD" --admin_email="$EMAIL"
+lando composer install
 
-## TODO: Install WordPress without disclosing admin_password to bash history
-# wp core install --url=example.com --title=Example --admin_user=supervisor --admin_email=info@example.com --prompt=admin_password < admin_password.t$
+pwd
+
+$PWD
+
+lando wp core config --path='$PWD/web' --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --extra-php <<PHP
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', true);
+define('WP_MEMORY_LIMIT', '256M');
+PHP
+
+lando wp core install --path='$PWD/web' --url=http://$LOCALNAME.lndo.site --title="$SITENAME" --admin_user=$USERNAME --admin_password="$PASSWORD" --admin_email="$EMAIL"
+
 
 # remove wp componenets
-terminus wp $PANTHEONNAME.dev widget delete recent-posts-1 recent-posts-2 archives-1 archives-2 categories-1 categories-2 meta-1 meta-2 search-1 search-2
-terminus wp $PANTHEONNAME.dev theme delete twentyfifteen twentysixteen twentyfourteen twentythirteen twentytwelve twentyeleven twentyten
-terminus wp $PANTHEONNAME.dev plugin uninstall akismet hello
-terminus wp $PANTHEONNAME.dev post delete 1 2 3 4 5 -- force
+lando wp widget delete recent-posts-1 recent-posts-2 archives-1 archives-2 categories-1 categories-2 meta-1 meta-2 search-1 search-2
+lando wp theme delete twentyfifteen twentysixteen twentyfourteen twentythirteen twentytwelve twentyeleven twentytend
+lando wp plugin uninstall akismet hello
+lando wp post delete 1 2 3 4 5 -- force
 
 #initialize othe environments
-terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN
-terminus env:deploy $PANTHEONNAME.test --updatedb --note="Initialize the Test environment"
-terminus env:deploy $PANTHEONNAME.live  --updatedb --note="Initialize the Live environment"
+#terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN
+#terminus env:deploy $PANTHEONNAME.test --updatedb --note="Initialize the Test environment"
+#terminus env:deploy $PANTHEONNAME.live  --updatedb --note="Initialize the Live environment"
 
 #TODO: setup composer
 

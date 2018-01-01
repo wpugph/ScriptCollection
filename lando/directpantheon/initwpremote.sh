@@ -10,6 +10,7 @@ export PATH
 terminus auth:login --email=$EMAIL --machine-token=$MACHINETOKEN  --yes
 
 terminus site:create $PANTHEONNAME "$SITENAME" WordPress
+# add --org to associate with posibly my id a9b08d94-b907-4dcb-8aec-fd0780453929
 
 #install core WP
 terminus wp $PANTHEONNAME.dev -- core install --url=https://dev-$PANTHEONNAME.pantheonsite.io --title="$SITENAME" --admin_user=$USERNAME --admin_password="$PASSWORD" --admin_email="$EMAIL"
